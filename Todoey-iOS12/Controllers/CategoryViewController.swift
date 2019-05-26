@@ -17,14 +17,9 @@ class CategoryViewController: SwipeTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadCategories()
-        
         tableView.separatorStyle = .none
-        
     }
-    
-
 
     //MARK: - TableView Datasource Methods
     
@@ -35,8 +30,14 @@ class CategoryViewController: SwipeTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "No category added yet"
-        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].colour ?? "6969FF")
+        if let category = categories?[indexPath.row] {
+        cell.textLabel?.text = category.name
+        
+            guard let categoryColour = UIColor(hexString: category.colour) else {fatalError()}
+            
+        cell.backgroundColor = categoryColour
+        cell.textLabel?.textColor = ContrastColorOf(categoryColour, returnFlat:  true)
+        }
         return cell
     }
     
@@ -73,6 +74,7 @@ class CategoryViewController: SwipeTableViewController {
             }
         }
     }
+    
     //MARK: - ADD New Category
 
     @IBAction func addBtnPressed(_ sender: UIBarButtonItem) {
@@ -94,8 +96,6 @@ class CategoryViewController: SwipeTableViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
- 
 
     //MARK: - TableView Delegate Methods
     

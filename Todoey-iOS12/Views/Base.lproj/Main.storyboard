@@ -87,6 +87,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="serchBar" destination="GO2-wp-0bN" id="JdA-2R-lfU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5X-NN-YBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
